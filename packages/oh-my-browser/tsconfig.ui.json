@@ -1,0 +1,9 @@
+{
+	"extends": "../tsconfig.workspace.json",
+	"include": ["src/ui", "src/browser/protocol.ts"],
+	"compilerOptions": {
+		"lib": ["ES2024", "DOM", "DOM.Iterable"],
+		"noEmit": true,
+		"types": ["bun", "assets"]
+	}
+}
