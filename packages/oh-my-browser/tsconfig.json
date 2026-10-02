@@ -1,0 +1,10 @@
+{
+	"extends": "../tsconfig.workspace.json",
+	"include": ["src/browser", "src/host", "src/prompts", "scripts"],
+	"exclude": ["src/ui", "src/main", "src/preload", "dist", "node_modules"],
+	"compilerOptions": {
+		"lib": ["ES2024", "ESNext.Disposable"],
+		"noEmit": true,
+		"types": ["bun", "assets"]
+	}
+}

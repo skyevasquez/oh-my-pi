@@ -1,0 +1,53 @@
+{
+	"type": "module",
+	"name": "@oh-my-pi/oh-my-browser",
+	"version": "0.1.0",
+	"private": true,
+	"description": "omp-native Chromium desktop browser (Electron) with createAgentSession as the core runtime",
+	"homepage": "https://omp.sh",
+	"author": { "name": "Stencil Labs, Inc.", "url": "https://stencil.so" },
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/can1357/oh-my-pi.git",
+		"directory": "packages/oh-my-browser"
+	},
+	"bugs": {
+		"url": "https://github.com/can1357/oh-my-pi/issues"
+	},
+	"keywords": ["agent", "browser", "electron", "omp", "oh-my-pi"],
+	"bin": {
+		"oh-my-browser": "./scripts/start.ts"
+	},
+	"scripts": {
+		"start": "bun scripts/start.ts",
+		"dev": "bun scripts/dev.ts",
+		"smoke": "bun scripts/smoke.ts",
+		"build:electron": "bun scripts/build-electron.ts",
+		"check": "oxlint . && oxfmt --check --no-error-on-unmatched-pattern 'src/**/*.{ts,tsx,css,html}' '{test,scripts}/**/*.ts' '*.ts' && bun run check:types && bun run smoke",
+		"check:types": "tsgo -p tsconfig.ui.json --noEmit",
+		"check:types:host": "tsgo -p tsconfig.json --noEmit",
+		"lint": "oxlint .",
+		"fix": "oxlint --fix --fix-suggestions . && bun run fmt",
+		"fmt": "oxfmt --no-error-on-unmatched-pattern 'src/**/*.{ts,tsx,css,html}' '{test,scripts}/**/*.ts' '*.ts'"
+	},
+	"dependencies": {
+		"@oh-my-pi/pi-coding-agent": "catalog:",
+		"@oh-my-pi/pi-tui": "catalog:",
+		"@oh-my-pi/pi-utils": "catalog:",
+		"electron": "^39.2.7"
+	},
+	"devDependencies": {
+		"@types/bun": "catalog:"
+	},
+	"engines": {
+		"bun": ">=1.3.14"
+	},
+	"files": [
+		"src",
+		"scripts",
+		"dist",
+		"README.md",
+		"CHANGELOG.md"
+	]
+}

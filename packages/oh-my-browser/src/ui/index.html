@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			http-equiv="Content-Security-Policy"
+			content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data: https:; connect-src 'self' ws://127.0.0.1:* http://127.0.0.1:*; frame-src * data: https: http:;"
+		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>oh-my-browser</title>
+		<link rel="stylesheet" href="./styles.css" />
+	</head>
+	<body>
+		<div id="app" class="app">
+			<aside class="rail" aria-label="Sidebar">
+				<div class="rail-top">
+					<div class="brand">oh-my-browser</div>
+					<div class="rail-actions">
+						<button type="button" id="btn-search" class="icon-btn" title="Search">⌕</button>
+						<button type="button" id="btn-new-chat" class="icon-btn" title="New task">✦</button>
+					</div>
+				</div>
+
+				<section class="rail-section">
+					<h2>Bookmarks</h2>
+					<ul id="bookmark-list" class="rail-list">
+						<li><button type="button" data-url="https://github.com">GitHub</button></li>
+						<li><button type="button" data-url="https://docs.omp.sh">omp docs</button></li>
+						<li><button type="button" data-url="https://example.com">Example</button></li>
+					</ul>
+				</section>
+
+				<section class="rail-section">
+					<div class="section-head">
+						<h2>Tabs</h2>
+						<button type="button" id="btn-new-tab" class="text-btn">+ New Tab</button>
+					</div>
+					<ul id="human-tabs" class="rail-list tabs"></ul>
+				</section>
+
+				<section class="rail-section">
+					<div class="section-head">
+						<h2>Agent tabs <span id="agent-count" class="badge">0</span></h2>
+						<button type="button" id="btn-new-agent" class="text-btn">+ Agent</button>
+					</div>
+					<ul id="agent-tabs" class="rail-list tabs"></ul>
+				</section>
+
+				<div class="rail-foot">
+					<label class="cwd-label">
+						Working folder
+						<input id="cwd-input" type="text" spellcheck="false" />
+					</label>
+					<div id="model-label" class="model-label">Model: discovering…</div>
+				</div>
+			</aside>
+
+			<main class="main">
+				<header class="topbar">
+					<div class="nav-btns">
+						<button type="button" id="btn-back" class="icon-btn" title="Back">←</button>
+						<button type="button" id="btn-forward" class="icon-btn" title="Forward">→</button>
+						<button type="button" id="btn-reload" class="icon-btn" title="Reload">↻</button>
+					</div>
+					<form id="omnibox-form" class="omnibox" autocomplete="off">
+						<input id="omnibox" type="text" placeholder="Search or type a URL" spellcheck="false" />
+					</form>
+					<button type="button" id="btn-side-panel" class="icon-btn" title="Toggle side panel">▣</button>
+				</header>
+
+				<section class="stage">
+					<div id="ntp" class="ntp">
+						<div class="ntp-inner">
+							<p class="ntp-kicker">oh-my-browser</p>
+							<h1>Ask AI a task</h1>
+							<p class="ntp-sub">@ for context · Tab switches Search / Ask AI</p>
+							<form id="ntp-form" class="composer">
+								<textarea id="ntp-input" rows="3" placeholder="Ask AI a task, @ for context."></textarea>
+								<div class="composer-row">
+									<div class="composer-left">
+										<select id="ntp-mode" aria-label="Composer mode">
+											<option value="ask">Ask AI</option>
+											<option value="search">Search</option>
+										</select>
+										<select id="permission-mode" aria-label="Permission mode">
+											<option value="read">Read</option>
+											<option value="guard" selected>Guard</option>
+											<option value="full">Full</option>
+										</select>
+									</div>
+									<button type="submit" class="primary-btn">Run task</button>
+								</div>
+							</form>
+							<div id="recent-tasks" class="recent"></div>
+						</div>
+					</div>
+
+					<div id="webview-host" class="webview-host" hidden></div>
+				</section>
+			</main>
+
+			<aside id="side-panel" class="side-panel" hidden>
+				<div class="side-head">
+					<strong>Task</strong>
+					<button type="button" id="btn-close-side" class="icon-btn" title="Close">×</button>
+				</div>
+				<div id="page-attach" class="page-attach" hidden>
+					<span id="page-attach-title"></span>
+					<button type="button" id="btn-detach" class="text-btn">Remove</button>
+				</div>
+				<div id="transcript" class="transcript"></div>
+				<div id="approval" class="approval" hidden></div>
+				<div id="status-line" class="status-line"></div>
+				<form id="side-form" class="composer side-composer">
+					<textarea id="side-input" rows="2" placeholder="Ask about this page…"></textarea>
+					<div class="composer-row">
+						<button type="button" id="btn-attach-page" class="text-btn">Attach page</button>
+						<button type="submit" class="primary-btn">Send</button>
+					</div>
+				</form>
+			</aside>
+		</div>
+		<script type="module" src="./app.js"></script>
+	</body>
+</html>

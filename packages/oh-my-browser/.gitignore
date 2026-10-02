@@ -1,0 +1,4 @@
+dist/
+src/ui/app.js
+src/ui/app.js.map
+*.log
